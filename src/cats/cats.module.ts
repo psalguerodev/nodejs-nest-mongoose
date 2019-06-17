@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
+import { MongooseModule, getModelToken } from '@nestjs/mongoose';
 import { CatController } from './controllers/cat.controller';
 import { CatsService } from './services/cats.service';
 import { CatSchema } from './schema/cat.schema';
@@ -9,6 +9,8 @@ import { CatSchema } from './schema/cat.schema';
     MongooseModule.forFeature([{ name: 'Cat', schema: CatSchema }]),
   ],
   controllers: [CatController],
-  providers: [CatsService]
+  providers: [
+    CatsService,
+  ],
 })
 export class CatsModule {}
