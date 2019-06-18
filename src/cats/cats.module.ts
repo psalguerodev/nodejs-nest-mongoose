@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule, getModelToken } from '@nestjs/mongoose';
+import { MongooseModule } from '@nestjs/mongoose';
 import { CatController } from './controllers/cat.controller';
 import { CatsService } from './services/cats.service';
 import { CatSchema } from './schema/cat.schema';

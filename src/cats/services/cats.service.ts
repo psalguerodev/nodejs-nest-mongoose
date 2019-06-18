@@ -14,6 +14,13 @@ export class CatsService {
   }
 
   async findAll(): Promise<Cat[]> {
-    return await this.catModel.find().exec();
+    return await this.catModel.find().sort({name: 'asc' }).exec();
+  }
+
+  async updateOne(idCat: string, createCatDto: CreateCatDto): Promise<Cat> {
+    return await this.catModel.findByIdAndUpdate(idCat, createCatDto).exec();
+  }
+  async findOneById(idCat: string): Promise<Cat> {
+    return await this.catModel.findById(idCat);
   }
 }

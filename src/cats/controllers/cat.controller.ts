@@ -1,4 +1,4 @@
-import { Controller, Post, Req, Body, Res, HttpStatus, Get } from '@nestjs/common';
+import { Controller, Post, Body, Res, HttpStatus, Get, Put, Param } from '@nestjs/common';
 import { CreateCatDto } from '../dto/createCatDto';
 import { Response } from 'express';
 import { CatsService } from '../services/cats.service';
@@ -23,4 +23,20 @@ export class CatController {
     })
     .catch(error => response.status(HttpStatus.INTERNAL_SERVER_ERROR).json(error));
   }
+
+  @Get(':id')
+  findOneById(@Param() params, @Res() response: Response) {
+    this.catService.findOneById(params.id)
+    .then(catFound => response.status(HttpStatus.OK).json(catFound))
+    .catch(error => response.status(HttpStatus.INTERNAL_SERVER_ERROR).json(error));
+  }
+
+  @Put(':id')
+  updateOne(@Param() params, @Body() createCatDto: CreateCatDto, @Res() response: Response) {
+    this.catService.updateOne(params.id, createCatDto).then(catUpdated => {
+      response.status(HttpStatus.OK).json(createCatDto);
+    })
+    .catch(error => response.status(HttpStatus.INTERNAL_SERVER_ERROR).json(error));
+  }
+
 }
